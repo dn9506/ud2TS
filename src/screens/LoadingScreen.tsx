@@ -1,9 +1,9 @@
 import * as Font from 'expo-font'
 import { useCallback } from 'react'
 import { Image, StyleSheet, View } from 'react-native'
-import { topNavigationProps } from '../navigation/types'
+import { TNavigationProps } from '../navigation/types'
 
-export const LoadingScreen = ({ navigation }: topNavigationProps) => {
+export const LoadingScreen = ({ navigation }: TNavigationProps) => {
 	const [fontsLoaded] = Font.useFonts({
 		'open-bolt': require('../../assets/fonts/DancingScript-Bold.ttf'),
 		'open-regular': require('../../assets/fonts/DancingScript-Regular.ttf'),
@@ -11,7 +11,7 @@ export const LoadingScreen = ({ navigation }: topNavigationProps) => {
 
 	const onLayoutRootView = useCallback(async () => {
 		if (fontsLoaded) {
-			navigation.replace('Main')
+			navigation.replace('Home')
 		}
 	}, [fontsLoaded])
 

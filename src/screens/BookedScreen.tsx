@@ -1,18 +1,18 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet } from 'react-native'
+import { PostList } from '../components/PostList'
+import { TPost } from '../components/types'
+import { DATA } from '../data'
+import { TNavigationProps } from '../navigation/types'
 
-export const BookedScreen = () => {
+export const BookedScreen = ({ navigation }: TNavigationProps) => {
+	const goToPost = (post: TPost) => {
+		navigation.navigate('Post', { postId: post.id, booked: post.booked })
+	}
+
 	return (
-		<View style={styles.container}>
-			<Text>BookedScreen</Text>
-		</View>
+		<PostList data={DATA.filter(item => item.booked)} goToPost={goToPost} />
 	)
 }
-
 const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		justifyContent: 'center',
-		alignItems: 'center',
-		backgroundColor: 'blue',
-	},
+	wrapper: { padding: 10 },
 })

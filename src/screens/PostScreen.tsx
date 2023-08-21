@@ -2,10 +2,10 @@ import { Alert, Button, Image, StyleSheet, Text, View } from 'react-native'
 import { HeaderButtons, Item } from 'react-navigation-header-buttons'
 import { AppHeaderIcons } from '../components/AppHeaderIcons'
 import { DATA } from '../data'
-import { topNavigationProps } from '../navigation/types'
+import { TNavigationProps } from '../navigation/types'
 import { THEME } from '../theme'
 
-export const PostScreen = ({ route, navigation }: topNavigationProps) => {
+export const PostScreen = ({ route, navigation }: TNavigationProps) => {
 	const postId = route.params?.postId
 	const post = DATA.find(p => p.id === postId)!
 
@@ -36,7 +36,7 @@ export const PostScreen = ({ route, navigation }: topNavigationProps) => {
 	)
 }
 
-PostScreen.navigationOptions = ({ route, navigation }: topNavigationProps) => {
+PostScreen.navigationOptions = ({ route, navigation }: TNavigationProps) => {
 	const booked = route.params?.booked
 	const iconName = booked ? 'ios-star' : 'ios-star-outline'
 	return {
