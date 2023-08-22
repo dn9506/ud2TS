@@ -30,7 +30,8 @@ MainScreen.navigationOptions = ({ navigation }: TNavigationProps) => ({
 			<Item
 				title='Toggle Drawer'
 				iconName='ios-menu'
-				onPress={() => navigation.navigate('Drawer')}
+				onPress={() => navigation.openDrawer()}
+				style={{ paddingLeft: 15 }}
 			/>
 		</HeaderButtons>
 	),
