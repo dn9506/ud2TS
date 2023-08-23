@@ -1,7 +1,8 @@
+import { NavigatorScreenParams } from '@react-navigation/native'
 import { StackScreenProps } from '@react-navigation/stack'
 
 export type RootStackParamList = {
-	Home: undefined
+	Home: NavigatorScreenParams<TTab>
 	Post: { postId: string; booked: boolean }
 	Loading: undefined
 }
@@ -14,7 +15,7 @@ export type TTab = {
 }
 
 export type TDrawer = {
-	DrawerHome: undefined
+	DrawerHome: NavigatorScreenParams<RootStackParamList>
 	CreatePost: undefined
 	About: undefined
 }
