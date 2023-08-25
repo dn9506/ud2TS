@@ -1,9 +1,17 @@
+import { BottomTabScreenProps } from '@react-navigation/bottom-tabs'
+import { CompositeScreenProps } from '@react-navigation/native'
+import { StackScreenProps } from '@react-navigation/stack'
 import * as Font from 'expo-font'
 import { useCallback } from 'react'
 import { Image, StyleSheet, View } from 'react-native'
-import { TNavigationProps } from '../navigation/types'
+import { RootBottomTabParamList, RootStackParamList } from '../navigation/types'
 
-export const LoadingScreen = ({ navigation }: TNavigationProps) => {
+type LoadingScreenNavigationProps = CompositeScreenProps<
+	StackScreenProps<RootStackParamList, 'Loading'>,
+	BottomTabScreenProps<RootBottomTabParamList>
+>
+
+export const LoadingScreen = ({ navigation }: LoadingScreenNavigationProps) => {
 	const [fontsLoaded] = Font.useFonts({
 		'open-bolt': require('../../assets/fonts/DancingScript-Bold.ttf'),
 		'open-regular': require('../../assets/fonts/DancingScript-Regular.ttf'),
@@ -11,7 +19,7 @@ export const LoadingScreen = ({ navigation }: TNavigationProps) => {
 
 	const onLayoutRootView = useCallback(async () => {
 		if (fontsLoaded) {
-			navigation.replace('Home')
+			navigation.replace('Home', { screen: 'AllPosts' })
 		}
 	}, [fontsLoaded])
 

@@ -1,11 +1,17 @@
+import { StackScreenProps } from '@react-navigation/stack'
 import { Alert, Button, Image, StyleSheet, Text, View } from 'react-native'
 import { HeaderButtons, Item } from 'react-navigation-header-buttons'
 import { AppHeaderIcons } from '../components/AppHeaderIcons'
 import { DATA } from '../data'
-import { TNavigationProps } from '../navigation/types'
+import { RootStackParamList } from '../navigation/types'
 import { THEME } from '../theme'
 
-export const PostScreen = ({ route, navigation }: TNavigationProps) => {
+type PostScreenNavigationProps = StackScreenProps<RootStackParamList, 'Post'>
+
+export const PostScreen = ({
+	route,
+	navigation,
+}: PostScreenNavigationProps) => {
 	const postId = route.params?.postId
 	const post = DATA.find(p => p.id === postId)!
 
@@ -36,7 +42,10 @@ export const PostScreen = ({ route, navigation }: TNavigationProps) => {
 	)
 }
 
-PostScreen.navigationOptions = ({ route, navigation }: TNavigationProps) => {
+PostScreen.navigationOptions = ({
+	route,
+	navigation,
+}: PostScreenNavigationProps) => {
 	const booked = route.params?.booked
 	const iconName = booked ? 'ios-star' : 'ios-star-outline'
 	return {
@@ -55,9 +64,6 @@ PostScreen.navigationOptions = ({ route, navigation }: TNavigationProps) => {
 			</HeaderButtons>
 		),
 	}
-}
-interface IPostScreen {
-	postId: string
 }
 
 const styles = StyleSheet.create({

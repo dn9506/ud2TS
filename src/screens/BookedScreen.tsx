@@ -1,12 +1,26 @@
+import { BottomTabScreenProps } from '@react-navigation/bottom-tabs'
+import { DrawerScreenProps } from '@react-navigation/drawer'
+import { CompositeScreenProps } from '@react-navigation/native'
 import { StyleSheet } from 'react-native'
 import { PostList } from '../components/PostList'
 import { TPost } from '../components/types'
 import { DATA } from '../data'
-import { TNavigationProps } from '../navigation/types'
+import {
+	RootBottomTabParamList,
+	RootDrawerParamList,
+} from '../navigation/types'
 
-export const BookedScreen = ({ navigation }: TNavigationProps) => {
+type BookedScreenNavigationProps = CompositeScreenProps<
+	BottomTabScreenProps<RootBottomTabParamList, 'Booked'>,
+	DrawerScreenProps<RootDrawerParamList>
+>
+
+export const BookedScreen = ({ navigation }: BookedScreenNavigationProps) => {
 	const goToPost = (post: TPost) => {
-		navigation.navigate('Post', { postId: post.id, booked: post.booked })
+		navigation.navigate('MainNav', {
+			screen: 'Post',
+			params: { postId: post.id, booked: post.booked },
+		})
 	}
 
 	return (

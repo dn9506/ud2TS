@@ -1,22 +1,18 @@
 import { NavigatorScreenParams } from '@react-navigation/native'
-import { StackScreenProps } from '@react-navigation/stack'
 
 export type RootStackParamList = {
-	Loading: undefined
-	MainPage: NavigatorScreenParams<BottomTabType>
+	Home: NavigatorScreenParams<RootBottomTabParamList>
 	Post: { postId: string; booked: boolean }
-	DrawerPage: NavigatorScreenParams<DrawerType>
+	Loading: undefined
 }
 
-export type BottomTabType = {
+export type RootBottomTabParamList = {
 	AllPosts: undefined
 	Booked: undefined
 }
 
-export type DrawerType = {
-	MainScreenRef: undefined
+export type RootDrawerParamList = {
+	MainNav: NavigatorScreenParams<RootStackParamList>
 	CreatePost: undefined
 	About: undefined
 }
-
-export type TNavigationProps = StackScreenProps<RootStackParamList>
