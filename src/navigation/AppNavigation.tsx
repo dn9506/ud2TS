@@ -2,12 +2,9 @@ import { Ionicons } from '@expo/vector-icons'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { createDrawerNavigator } from '@react-navigation/drawer'
 import { createStackNavigator } from '@react-navigation/stack'
-import { AboutScreen } from '../screens/AboutScreen'
-import { BookedScreen } from '../screens/BookedScreen'
-import { CreateScreen } from '../screens/CreateScreen'
+import { View } from 'react-native'
 import { LoadingScreen } from '../screens/LoadingScreen'
 import { MainScreen } from '../screens/MainScreen'
-import { PostScreen } from '../screens/PostScreen'
 import { THEME } from '../theme'
 import {
 	RootBottomTabParamList,
@@ -30,16 +27,83 @@ const DrawerNavigation = () => (
 			...screenOptions,
 			headerShown: false,
 		}}
-		initialRouteName='MainNav'
 	>
-		<Drawer.Screen name='MainNav' component={StackNavigation} />
+		<Drawer.Screen name='MainScreenRef' component={() => <View></View>} />
 		<Drawer.Screen
-			name='CreatePost'
+			name='CreatePostScreen'
+			component={() => <View></View>}
+			options={{ headerShown: true }}
+		/>
+		<Drawer.Screen
+			name='AboutScreen'
+			component={() => <View></View>}
+			options={{ headerShown: true }}
+		/>
+	</Drawer.Navigator>
+)
+
+const TabNavigation = () => (
+	<Tab.Navigator
+		screenOptions={{
+			...screenOptions,
+			headerShown: false,
+		}}
+	>
+		<Tab.Screen
+			name='AllPosts'
+			component={() => MainScreen}
+			options={{
+				...MainScreen.navigationOptions,
+				tabBarIcon: info => (
+					<Ionicons name='ios-albums' size={25} color={info.color} />
+				),
+				title: 'All Posts',
+			}}
+		/>
+		<Tab.Screen
+			name='Booked'
+			component={() => <View></View>}
+			options={{
+				tabBarIcon: info => (
+					<Ionicons name='ios-star' size={25} color={info.color} />
+				),
+			}}
+		/>
+	</Tab.Navigator>
+)
+
+const StackNavigation = () => (
+	<Stack.Navigator screenOptions={screenOptions} initialRouteName='Loading'>
+		<Stack.Screen name='MainScreen' component={() => <View></View>} />
+		<Stack.Screen name='Post' component={() => <View></View>} />
+		<Stack.Screen
+			name='Loading'
+			component={LoadingScreen}
+			options={LoadingScreen.navigationOptions}
+		/>
+		<Stack.Screen name='Drawer' component={() => <View></View>} />
+	</Stack.Navigator>
+)
+
+export const AppNavigation = StackNavigation
+
+/*
+const DrawerNavigation = () => (
+	<Drawer.Navigator
+		screenOptions={{
+			...screenOptions,
+			headerShown: false,
+		}}
+		initialRouteName='MainScreenRef'
+	>
+		<Drawer.Screen name='MainScreenRef' component={StackNavigation} />
+		<Drawer.Screen
+			name='CreatePostScreen'
 			component={CreateScreen}
 			options={{ headerShown: true }}
 		/>
 		<Drawer.Screen
-			name='About'
+			name='AboutScreen'
 			component={AboutScreen}
 			options={{ headerShown: true }}
 		/>
@@ -48,11 +112,7 @@ const DrawerNavigation = () => (
 
 const StackNavigation = () => (
 	<Stack.Navigator screenOptions={screenOptions} initialRouteName='Loading'>
-		<Stack.Screen
-			name='Home'
-			component={TabNavigation}
-			options={MainScreen.navigationOptions}
-		/>
+		<Stack.Screen name='MainScreen' component={TabNavigation} />
 		<Stack.Screen
 			name='Loading'
 			component={LoadingScreen}
@@ -77,6 +137,7 @@ const TabNavigation = () => (
 			name='AllPosts'
 			component={MainScreen}
 			options={{
+				...MainScreen.navigationOptions,
 				tabBarIcon: info => (
 					<Ionicons name='ios-albums' size={25} color={info.color} />
 				),
@@ -95,4 +156,4 @@ const TabNavigation = () => (
 	</Tab.Navigator>
 )
 
-export const AppNavigation = DrawerNavigation
+*/
