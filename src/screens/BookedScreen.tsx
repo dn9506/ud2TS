@@ -1,4 +1,4 @@
-import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs'
+import { BottomTabScreenProps } from '@react-navigation/bottom-tabs'
 import { CompositeScreenProps } from '@react-navigation/native'
 import { StackScreenProps } from '@react-navigation/stack'
 import { StyleSheet } from 'react-native'
@@ -8,15 +8,12 @@ import { DATA } from '../data'
 import { RootBottomTabParamList, RootStackParamList } from '../navigation/types'
 
 type BookedScreenNavigationProps = CompositeScreenProps<
-	BottomTabNavigationProp<RootBottomTabParamList, 'Booked'>,
+	BottomTabScreenProps<RootBottomTabParamList, 'Booked'>,
 	StackScreenProps<RootStackParamList>
 >
 export const BookedScreen = ({ navigation }: BookedScreenNavigationProps) => {
 	const goToPost = (post: TPost) => {
-		navigation.navigate('MainNav', {
-			screen: 'Post',
-			params: { postId: post.id, booked: post.booked },
-		})
+		navigation.navigate('Post', { postId: post.id, booked: post.booked })
 	}
 
 	return (

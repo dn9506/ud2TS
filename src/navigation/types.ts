@@ -1,10 +1,9 @@
 import { NavigatorScreenParams } from '@react-navigation/native'
 
 export type RootStackParamList = {
-	MainScreen: NavigatorScreenParams<RootBottomTabParamList>
+	MainScreenTab: NavigatorScreenParams<RootBottomTabParamList>
 	Post: { postId: string; booked: boolean }
 	Loading: undefined
-	Drawer: NavigatorScreenParams<RootDrawerParamList>
 }
 
 export type RootBottomTabParamList = {
@@ -13,7 +12,7 @@ export type RootBottomTabParamList = {
 }
 
 export type RootDrawerParamList = {
-	MainScreenRef: undefined
+	MainScreen: undefined
 	CreatePostScreen: undefined
 	AboutScreen: undefined
 }

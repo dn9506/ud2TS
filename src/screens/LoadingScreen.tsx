@@ -16,7 +16,7 @@ export const LoadingScreen = ({ navigation }: LoadingScreenNavigationProps) => {
 
 	const onLayoutRootView = useCallback(async () => {
 		if (fontsLoaded) {
-			navigation.replace('MainScreen', { screen: 'AllPosts' })
+			navigation.replace('MainScreenTab', { screen: 'AllPosts' })
 		}
 	}, [fontsLoaded])
 
