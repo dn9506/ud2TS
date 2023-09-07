@@ -14,10 +14,13 @@ interface IPostState {
 const initState: IPostState = {
 	posts: DATA,
 }
+
+const postsReducer = (state, action) => {}
+
 const state = createSlice({
 	name: 'Post',
 	initialState: initState,
 	reducers: {
-		bookChange: state => {},
+		posts: postsReducer,
 	},
 })
