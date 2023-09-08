@@ -15,12 +15,10 @@ const initState: IPostState = {
 	posts: DATA,
 }
 
-const postsReducer = (state, action) => {}
-
-const state = createSlice({
+const store = createSlice({
 	name: 'Post',
 	initialState: initState,
 	reducers: {
-		posts: postsReducer,
+		toggleBooked: (state, action) => {},
 	},
 })
