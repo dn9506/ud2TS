@@ -1,18 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { DATA } from '../../data'
+import { IPost } from '../../models/IPost'
 
 interface IPostState {
-	posts: {
-		id: string
-		img: string
-		text: string
-		date: string
-		booked: boolean
-	}[]
+	posts: IPost[]
+	isLoading: boolean
+	error: string
 }
 
 const initState: IPostState = {
 	posts: DATA,
+	isLoading: false,
+	error: '',
 }
 
 const store = createSlice({
@@ -22,3 +21,5 @@ const store = createSlice({
 		toggleBooked: (state, action) => {},
 	},
 })
+
+export default store.reducer
