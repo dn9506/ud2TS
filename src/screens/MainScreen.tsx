@@ -7,7 +7,7 @@ import { HeaderButtons, Item } from 'react-navigation-header-buttons'
 import { AppHeaderIcons } from '../components/AppHeaderIcons'
 import { PostList } from '../components/PostList'
 import { TPost } from '../components/types'
-import { DATA } from '../data'
+import { useAppSelector } from '../hooks/redux'
 import {
 	RootBottomTabParamList,
 	RootDrawerParamList,
@@ -26,7 +26,8 @@ export const MainScreen = ({ navigation }: MainScreenNavigationProps) => {
 	const goToPost = (post: TPost) => {
 		navigation.navigate('Post', { postId: post.id, booked: post.booked })
 	}
-	return <PostList data={DATA} goToPost={goToPost} />
+	const { posts } = useAppSelector(state => state.posts)
+	return <PostList data={posts} goToPost={goToPost} />
 }
 
 MainScreen.navigationOptions = ({ navigation }: MainScreenNavigationProps) => ({

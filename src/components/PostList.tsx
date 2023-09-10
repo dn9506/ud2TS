@@ -1,14 +1,14 @@
 import React from 'react'
 import { FlatList, StyleSheet, View } from 'react-native'
+import { IPost } from '../models/IPost'
 import { Post } from './Post'
-import { TPost } from './types'
 
 interface IPostList {
-	data: TPost[]
-	goToPost: (post: TPost) => void
+	data: IPost[]
+	goToPost: (post: IPost) => void
 }
 
-export const PostList = ({ data, goToPost }: IPostList) => {
+export const PostList: React.FC<IPostList> = ({ data, goToPost }) => {
 	return (
 		<View style={styles.wrapper}>
 			<FlatList
