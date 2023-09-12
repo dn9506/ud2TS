@@ -7,7 +7,7 @@ import { store } from './src/store/store'
 
 export default function App() {
 	return (
-		<Provider store={store}>
+		<Provider store={store()}>
 			<NavigationContainer>
 				<AppNavigation />
 			</NavigationContainer>

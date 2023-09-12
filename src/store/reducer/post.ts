@@ -1,35 +1,37 @@
-import { CaseReducer, createSlice } from '@reduxjs/toolkit'
+import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { DATA } from '../../data'
 import { IPost } from '../../models/IPost'
 
 interface IPostState {
-	posts: IPost[]
+	allPosts: IPost[]
+	bookedPosts: IPost[]
 }
-interface postActionToggleBooked {
-	type: 'toggleBooked'
-	payload: IPost
-}
+type postActionToggleBooked = { id: string }
 
 type PostActions = postActionToggleBooked
 
-const initState: IPostState = {
-	posts: DATA,
+const initialState: IPostState = {
+	allPosts: [],
+	bookedPosts: [],
 }
 
-const toggleBooked: CaseReducer<IPostState, PostActions> = (state, action) => {
-	state.posts.map(post =>
-		post.id === action.payload.id
-			? (post.booked = !post.booked)
-			: (post.booked = !post.booked)
-	)
-}
-
-const store = createSlice({
-	name: 'Post',
-	initialState: initState,
+const postsStore = createSlice({
+	name: 'post',
+	initialState,
 	reducers: {
-		toggleBooked,
+		loadPosts: state => {
+			state.allPosts = DATA
+			state.bookedPosts = DATA.filter(post => post.booked)
+		},
+		toggleBooked: (state, action: PayloadAction<PostActions>) => {
+			state.posts.map(post =>
+				post.id === action.payload.id
+					? (post.booked = !post.booked)
+					: (post.booked = !post.booked)
+			)
+		},
 	},
 })
 
-export default store.reducer
+export const postsStoreActions = postsStore.actions
+export default postsStore.reducer

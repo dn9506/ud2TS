@@ -2,8 +2,9 @@ import { StackScreenProps } from '@react-navigation/stack'
 import { Alert, Button, Image, StyleSheet, Text, View } from 'react-native'
 import { HeaderButtons, Item } from 'react-navigation-header-buttons'
 import { AppHeaderIcons } from '../components/AppHeaderIcons'
-import { DATA } from '../data'
+import { useAppDispatch, useAppSelector } from '../hooks/redux'
 import { RootStackParamList } from '../navigation/types'
+import { postsStoreActions } from '../store/reducer/post'
 import { THEME } from '../theme'
 
 type PostScreenNavigationProps = StackScreenProps<RootStackParamList, 'Post'>
@@ -13,7 +14,10 @@ export const PostScreen = ({
 	navigation,
 }: PostScreenNavigationProps) => {
 	const postId = route.params?.postId
-	const post = DATA.find(p => p.id === postId)!
+
+	const { posts } = useAppSelector(state => state.postsReducer)
+	const post = posts.find(p => p.id === postId)!
+	const check = posts.find(postCheck => postCheck.id === post.id)!
 
 	const removeHandler = () => {
 		Alert.alert(
@@ -38,6 +42,7 @@ export const PostScreen = ({
 				color={THEME.DANGER_COLOR}
 				onPress={removeHandler}
 			/>
+			<Text>{check.booked ? 'TRUE' : 'FALSE'}</Text>
 		</View>
 	)
 }
@@ -46,8 +51,14 @@ PostScreen.navigationOptions = ({
 	route,
 	navigation,
 }: PostScreenNavigationProps) => {
-	const booked = route.params?.booked
+	const { posts } = useAppSelector(state => state.postsReducer)
+	const booked = posts.find(
+		postCheck => postCheck.id === route.params.postId
+	)!.booked
 	const iconName = booked ? 'ios-star' : 'ios-star-outline'
+	const { toggleBooked } = postsStoreActions
+	const dispatch = useAppDispatch()
+
 	return {
 		title: `Post ${route.params?.postId}`,
 		headerStyle: {
@@ -59,7 +70,9 @@ PostScreen.navigationOptions = ({
 				<Item
 					title='Take photo'
 					iconName={iconName}
-					onPress={() => console.log('Press photo')}
+					onPress={() => {
+						dispatch(toggleBooked({ id: route.params.postId }))
+					}}
 				/>
 			</HeaderButtons>
 		),
