@@ -2,18 +2,17 @@ import { BottomTabScreenProps } from '@react-navigation/bottom-tabs'
 import { DrawerScreenProps } from '@react-navigation/drawer'
 import { CompositeScreenProps } from '@react-navigation/native'
 import { StackScreenProps } from '@react-navigation/stack'
-import React, { useEffect } from 'react'
+import React from 'react'
 import { HeaderButtons, Item } from 'react-navigation-header-buttons'
 import { AppHeaderIcons } from '../components/AppHeaderIcons'
 import { PostList } from '../components/PostList'
 import { TPost } from '../components/types'
-import { useAppDispatch, useAppSelector } from '../hooks/redux'
+import { useAppSelector } from '../hooks/redux'
 import {
 	RootBottomTabParamList,
 	RootDrawerParamList,
 	RootStackParamList,
 } from '../navigation/types'
-import { postsStoreActions } from '../store/reducer/post'
 
 type MainScreenNavigationProps = CompositeScreenProps<
 	BottomTabScreenProps<RootBottomTabParamList, 'AllPosts'>,
@@ -27,12 +26,10 @@ export const MainScreen = ({ navigation }: MainScreenNavigationProps) => {
 	const goToPost = (post: TPost) => {
 		navigation.navigate('Post', { postId: post.id, booked: post.booked })
 	}
-	const { allPosts } = useAppSelector(state => state.postsReducer)
 
-	useEffect(() => {
-		useAppDispatch(postsStoreActions.loadPosts())
-	}, [])
-	return <PostList data={allPosts} goToPost={goToPost} />
+	const { posts } = useAppSelector(state => state.postsReducer)
+
+	return <PostList data={posts} goToPost={goToPost} />
 }
 
 MainScreen.navigationOptions = ({ navigation }: MainScreenNavigationProps) => ({

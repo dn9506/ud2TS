@@ -9,10 +9,11 @@ type LoadingScreenNavigationProps = StackScreenProps<
 	'Loading'
 >
 export const LoadingScreen = ({ navigation }: LoadingScreenNavigationProps) => {
-	const [fontsLoaded] = Font.useFonts({
-		'open-bolt': require('../../assets/fonts/DancingScript-Bold.ttf'),
-		'open-regular': require('../../assets/fonts/DancingScript-Regular.ttf'),
-	})
+	const [fontsLoaded] = async () =>
+		await Font.loadAsync({
+			'open-bolt': require('../../assets/fonts/DancingScript-Bold.ttf'),
+			'open-regular': require('../../assets/fonts/DancingScript-Regular.ttf'),
+		})
 
 	const onLayoutRootView = useCallback(async () => {
 		if (fontsLoaded) {
