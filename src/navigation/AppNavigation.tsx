@@ -1,106 +1,70 @@
-import { Ionicons } from '@expo/vector-icons'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { createDrawerNavigator } from '@react-navigation/drawer'
+import { NavigatorScreenParams } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
-import { AboutScreen } from '../screens/AboutScreen'
-import { BookedScreen } from '../screens/BookedScreen'
-import { CreateScreen } from '../screens/CreateScreen'
-import { LoadingScreen } from '../screens/LoadingScreen'
-import { MainScreen } from '../screens/MainScreen'
-import { PostScreen } from '../screens/PostScreen'
-import { THEME } from '../theme'
-import {
-	RootBottomTabParamList,
-	RootDrawerParamList,
-	RootStackParamList,
-} from './types'
+import AboutScreen from './screens/AboutScreen'
+import AllPostsScreen from './screens/AllPostsScreen'
+import BookedScreen from './screens/BookedScreen'
+import CreatePostScreen from './screens/CreatePostScreen'
+import PostScreen from './screens/PostScreen'
 
-const screenOptions = {
-	headerStyle: { backgroundColor: THEME.MAIN_COLOR },
-	headerTintColor: 'white',
+type RootDrawerParamList = {
+	DrawerMainScreen: NavigatorScreenParams<RootStackParamList>
+	CreatePost: undefined
+	About: undefined
+}
+type RootStackParamList = {
+	MainScreen: NavigatorScreenParams<RootTabParamList>
+	PostScreen: { postId: string }
+}
+type RootTabParamList = {
+	AllPosts: undefined
+	Booked: undefined
 }
 
-const Stack = createStackNavigator<RootStackParamList>()
-const Tab = createBottomTabNavigator<RootBottomTabParamList>()
+const RootScreenOptions = {
+	headerTintColor: '#fff',
+	headerStyle: {
+		backgroundColor: '#3B6183',
+	},
+}
+
 const Drawer = createDrawerNavigator<RootDrawerParamList>()
+const Stack = createStackNavigator<RootStackParamList>()
+const Tab = createBottomTabNavigator<RootTabParamList>()
 
 const DrawerNavigation = () => (
-	<Drawer.Navigator
-		screenOptions={{
-			...screenOptions,
-			headerShown: false,
-			drawerActiveTintColor: THEME.MAIN_COLOR,
-			drawerLabelStyle: {
-				fontFamily: 'open-bolt',
-				fontSize: 20,
-			},
-		}}
-	>
-		<Drawer.Screen
-			name='MainScreen'
-			component={StackNavigation}
-			options={{ title: 'Main' }}
-		/>
-		<Drawer.Screen
-			name='CreatePostScreen'
-			component={CreateScreen}
-			options={{ title: 'Create new post', headerShown: true }}
-		/>
-		<Drawer.Screen
-			name='AboutScreen'
-			component={AboutScreen}
-			options={{ title: 'About', headerShown: true }}
-		/>
+	<Drawer.Navigator screenOptions={{ headerShown: false }}>
+		<Drawer.Screen name='DrawerMainScreen' component={StackNavigation} />
+		<Drawer.Screen name='CreatePost' component={CreatePostScreen} />
+		<Drawer.Screen name='About' component={AboutScreen} />
 	</Drawer.Navigator>
+)
+
+const StackNavigation = () => (
+	<Stack.Navigator screenOptions={RootScreenOptions}>
+		<Stack.Screen
+			name='MainScreen'
+			component={TabNavigation}
+			options={{ headerShown: false }}
+		/>
+		<Stack.Screen name='PostScreen' component={PostScreen} />
+	</Stack.Navigator>
 )
 
 const TabNavigation = () => (
 	<Tab.Navigator
 		screenOptions={{
-			...screenOptions,
-			headerShown: false,
+			...RootScreenOptions,
+			tabBarStyle: {
+				backgroundColor: '#3B6183',
+			},
+			tabBarActiveTintColor: '#55d4ff',
 		}}
 	>
-		<Tab.Screen
-			name='AllPosts'
-			component={MainScreen}
-			options={{
-				tabBarIcon: info => (
-					<Ionicons name='ios-albums' size={25} color={info.color} />
-				),
-				title: 'All Posts',
-			}}
-		/>
-		<Tab.Screen
-			name='Booked'
-			component={BookedScreen}
-			options={{
-				tabBarIcon: info => (
-					<Ionicons name='ios-star' size={25} color={info.color} />
-				),
-			}}
-		/>
+		<Tab.Screen name='AllPosts' component={AllPostsScreen} />
+		<Tab.Screen name='Booked' component={BookedScreen} />
 	</Tab.Navigator>
-)
-
-const StackNavigation = () => (
-	<Stack.Navigator screenOptions={screenOptions} initialRouteName='Loading'>
-		<Stack.Screen
-			name='Loading'
-			component={LoadingScreen}
-			options={LoadingScreen.navigationOptions}
-		/>
-		<Stack.Screen
-			name='MainScreenTab'
-			component={TabNavigation}
-			options={MainScreen.navigationOptions}
-		/>
-		<Stack.Screen
-			name='Post'
-			component={PostScreen}
-			options={PostScreen.navigationOptions}
-		/>
-	</Stack.Navigator>
 )
 
 export const AppNavigation = DrawerNavigation
