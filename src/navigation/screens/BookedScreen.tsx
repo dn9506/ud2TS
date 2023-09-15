@@ -9,6 +9,8 @@ const BookedScreen = () => {
 	)
 }
 
+BookedScreen.navigationOptions = {}
+
 export default BookedScreen
 
 const styles = StyleSheet.create({})

@@ -1,32 +1,54 @@
+import { MaterialIcons } from '@expo/vector-icons'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { createDrawerNavigator } from '@react-navigation/drawer'
-import { NavigatorScreenParams } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
+import { Alert } from 'react-native'
+import { HeaderButtons, Item } from 'react-navigation-header-buttons'
 import AboutScreen from './screens/AboutScreen'
 import AllPostsScreen from './screens/AllPostsScreen'
 import BookedScreen from './screens/BookedScreen'
 import CreatePostScreen from './screens/CreatePostScreen'
 import PostScreen from './screens/PostScreen'
-
-type RootDrawerParamList = {
-	DrawerMainScreen: NavigatorScreenParams<RootStackParamList>
-	CreatePost: undefined
-	About: undefined
-}
-type RootStackParamList = {
-	MainScreen: NavigatorScreenParams<RootTabParamList>
-	PostScreen: { postId: string }
-}
-type RootTabParamList = {
-	AllPosts: undefined
-	Booked: undefined
-}
+import {
+	RootDrawerParamList,
+	RootStackParamList,
+	RootTabParamList,
+} from './screens/types/types'
 
 const RootScreenOptions = {
 	headerTintColor: '#fff',
 	headerStyle: {
 		backgroundColor: '#3B6183',
 	},
+}
+
+const RootTabHeaderOptions = {
+	headerRight: () => (
+		<HeaderButtons
+			HeaderButtonComponent={() => (
+				<MaterialIcons name='photo-camera' size={24} color='white' />
+			)}
+		>
+			<Item
+				title='createPost'
+				iconName='newPost'
+				onPress={() => Alert.alert('settings')}
+			/>
+		</HeaderButtons>
+	),
+	headerLeft: () => (
+		<HeaderButtons
+			HeaderButtonComponent={() => (
+				<MaterialIcons name='menu' size={24} color='white' />
+			)}
+		>
+			<Item
+				title='toggleDrawer'
+				iconName='drawer'
+				onPress={() => Alert.alert('settings')}
+			/>
+		</HeaderButtons>
+	),
 }
 
 const Drawer = createDrawerNavigator<RootDrawerParamList>()
@@ -56,14 +78,41 @@ const TabNavigation = () => (
 	<Tab.Navigator
 		screenOptions={{
 			...RootScreenOptions,
+			...RootTabHeaderOptions,
 			tabBarStyle: {
 				backgroundColor: '#3B6183',
 			},
-			tabBarActiveTintColor: '#55d4ff',
+			tabBarActiveTintColor: 'white',
+			tabBarLabelStyle: { paddingBottom: 5 },
+			headerLeftContainerStyle: { paddingLeft: 10 },
 		}}
 	>
-		<Tab.Screen name='AllPosts' component={AllPostsScreen} />
-		<Tab.Screen name='Booked' component={BookedScreen} />
+		<Tab.Screen
+			name='AllPosts'
+			component={AllPostsScreen}
+			options={{
+				tabBarIcon: ({ focused }) => (
+					<MaterialIcons
+						name='list'
+						size={24}
+						color={focused ? 'white' : 'grey'}
+					/>
+				),
+			}}
+		/>
+		<Tab.Screen
+			name='Booked'
+			component={BookedScreen}
+			options={{
+				tabBarIcon: ({ focused }) => (
+					<MaterialIcons
+						name='playlist-add-check'
+						size={24}
+						color={focused ? 'white' : 'grey'}
+					/>
+				),
+			}}
+		/>
 	</Tab.Navigator>
 )
 

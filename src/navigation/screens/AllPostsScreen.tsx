@@ -9,6 +9,8 @@ const AllPostsScreen = () => {
 	)
 }
 
+AllPostsScreen.navigationOptions = {}
+
 export default AllPostsScreen
 
 const styles = StyleSheet.create({})
