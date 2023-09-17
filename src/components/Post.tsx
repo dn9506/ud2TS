@@ -1,10 +1,10 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 
-const Post = () => {
+const Post: React.PropsWithChildren = ({ children }) => {
 	return (
 		<View>
-			<Text>Post</Text>
+			<Text>...children</Text>
 		</View>
 	)
 }
