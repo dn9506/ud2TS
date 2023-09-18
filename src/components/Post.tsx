@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 
-const Post: React.PropsWithChildren = ({ children }) => {
+const Post = ({}) => {
 	return (
 		<View>
 			<Text>...children</Text>
