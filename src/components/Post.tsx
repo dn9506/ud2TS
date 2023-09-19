@@ -11,4 +11,8 @@ const Post = ({}) => {
 
 export default Post
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+	container: {
+		borderBlockColor: '#fff',
+	},
+})
