@@ -10,7 +10,9 @@ const AllPostsScreen = () => {
 	return (
 		<View>
 			<Text>AllPostsScreen</Text>
-			<Post />
+			{posts.map(post => (
+				<Post key={post.id} post={post} />
+			))}
 		</View>
 	)
 }

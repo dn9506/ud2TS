@@ -1,10 +1,12 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { Image, StyleSheet, Text, View } from 'react-native'
+import { IPost } from '../models/IPost'
 
-const Post = ({}) => {
+const Post = (post: IPost) => {
 	return (
-		<View>
-			<Text>...children</Text>
+		<View style={styles.container}>
+			<Text>{post.date}</Text>
+			<Image source={require(`${post.img}`)} />
 		</View>
 	)
 }
