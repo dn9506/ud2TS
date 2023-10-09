@@ -7,7 +7,7 @@ export type RootDrawerParamList = {
 }
 export type RootStackParamList = {
 	MainScreen: NavigatorScreenParams<RootTabParamList>
-	PostScreen: { postId: string }
+	PostScreen: undefined
 }
 export type RootTabParamList = {
 	AllPosts: undefined

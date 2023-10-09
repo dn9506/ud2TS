@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { FlatList, StyleSheet, Text, View } from 'react-native'
 import Post from '../../components/Post'
 import { DATA } from '../../data'
 import { IPost } from '../../models/IPost'
@@ -10,9 +10,11 @@ const AllPostsScreen = () => {
 	return (
 		<View>
 			<Text>AllPostsScreen</Text>
-			{posts.map(post => (
-				<Post key={post.id} post={post} />
-			))}
+
+			<FlatList
+				data={posts}
+				renderItem={post => <Post key={post.item.id} post={post.item} />}
+			/>
 		</View>
 	)
 }

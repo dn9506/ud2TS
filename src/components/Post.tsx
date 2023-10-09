@@ -1,14 +1,19 @@
 import React from 'react'
-import { ImageBackground, StyleSheet, Text, View } from 'react-native'
+import {
+	ImageBackground,
+	StyleSheet,
+	Text,
+	TouchableOpacity,
+} from 'react-native'
 import { IPost } from '../models/IPost'
 
 const Post = ({ post }: { post: IPost }) => {
 	return (
-		<View style={styles.container}>
+		<TouchableOpacity style={styles.container}>
 			<ImageBackground source={{ uri: post.img }} style={styles.img}>
 				<Text style={styles.textDate}>{Date.parse(post.date)}</Text>
 			</ImageBackground>
-		</View>
+		</TouchableOpacity>
 	)
 }
 

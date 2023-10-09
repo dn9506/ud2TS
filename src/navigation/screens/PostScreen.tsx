@@ -1,14 +1,25 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { Image, StyleSheet, Text, View } from 'react-native'
+import { DATA } from '../../data'
 
-const PostScreen = () => {
+interface IPostProps {
+	postId: string
+}
+
+const PostScreen = ({ postId }: IPostProps) => {
+	const post = DATA.find(post => post.id === postId)
+
 	return (
 		<View>
 			<Text>PostScreen</Text>
+			<Image source={{ uri: post?.img }} style={styles.img} />
+			<Text>{post?.text}</Text>
 		</View>
 	)
 }
 
 export default PostScreen
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+	img: {},
+})
