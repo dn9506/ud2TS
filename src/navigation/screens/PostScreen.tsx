@@ -1,13 +1,10 @@
 import React from 'react'
 import { Image, StyleSheet, Text, View } from 'react-native'
 import { DATA } from '../../data'
+import { PostScreenProps } from './types/types'
 
-interface IPostProps {
-	postId: string
-}
-
-const PostScreen = ({ postId }: IPostProps) => {
-	const post = DATA.find(post => post.id === postId)
+const PostScreen = ({ route, navigation }: PostScreenProps) => {
+	const post = DATA.find(post => post.id === route.params.postId)
 
 	return (
 		<View>
