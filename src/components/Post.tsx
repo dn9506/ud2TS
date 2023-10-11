@@ -7,7 +7,12 @@ import {
 } from 'react-native'
 import { IPost } from '../models/IPost'
 
-const Post = ({ post }: { post: IPost }) => {
+interface IUIPost {
+	post: IPost
+	goToPost: () => void
+}
+
+const Post: React.FC<IUIPost> = ({ post, goToPost }) => {
 	return (
 		<TouchableOpacity style={styles.container} onPress={goToPost}>
 			<ImageBackground source={{ uri: post.img }} style={styles.img}>
