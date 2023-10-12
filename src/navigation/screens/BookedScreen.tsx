@@ -6,7 +6,7 @@ import { DATA } from '../../data'
 import { IPost } from '../../models/IPost'
 import { BookedScreenProps } from './types/types'
 
-const BookedScreen: React.FC<BookedScreenProps> = ({ route, navigation }) => {
+const BookedScreen: React.FC<BookedScreenProps, {navigationOptions} : StackNavigationOptions> = ({ route, navigation }) => {
 	const posts: IPost[] = DATA.filter(post => post.booked)
 	return (
 		<View>
@@ -27,7 +27,7 @@ const BookedScreen: React.FC<BookedScreenProps> = ({ route, navigation }) => {
 	)
 }
 
-BookedScreen.navigationOptions = (): StackNavigationOptions => ({})
+BookedScreen.navigationOptions = () => ({})
 
 export default BookedScreen
 
