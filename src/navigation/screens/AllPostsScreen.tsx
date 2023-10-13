@@ -1,11 +1,15 @@
-import React from 'react'
+import React, { FC } from 'react'
 import { FlatList, StyleSheet, Text, View } from 'react-native'
 import Post from '../../components/Post'
 import { DATA } from '../../data'
 import { IPost } from '../../models/IPost'
+import { AllPostsScreenProps } from './types/types'
 
-const AllPostsScreen = () => {
+
+
+const AllPostsScreen:FC<AllPostsScreenProps> = ({navigation}) => {
 	const posts: IPost[] = DATA
+
 
 	return (
 		<View>
@@ -13,13 +17,13 @@ const AllPostsScreen = () => {
 
 			<FlatList
 				data={posts}
-				renderItem={post => <Post key={post.item.id} post={post.item} />}
+				renderItem={post => <Post key={post.item.id} post={post.item} goToPost={() => navigation.navigate('PostScreen', {postId: post.item.id})}/>}
 			/>
 		</View>
 	)
 }
 
-AllPostsScreen.navigationOptions = {}
+AllPostsScreen.navigationOptions:FC<AllPostsScreen> = () => {return({})}
 
 export default AllPostsScreen
 

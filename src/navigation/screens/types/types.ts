@@ -1,4 +1,8 @@
-import { NavigatorScreenParams } from '@react-navigation/native'
+import { BottomTabScreenProps } from '@react-navigation/bottom-tabs'
+import {
+	CompositeScreenProps,
+	NavigatorScreenParams,
+} from '@react-navigation/native'
 import { StackScreenProps } from '@react-navigation/stack'
 
 export type RootDrawerParamList = {
@@ -15,13 +19,14 @@ export type RootTabParamList = {
 	Booked: undefined
 }
 
-export type AllPostsScreenProps = StackScreenProps<
-	RootStackParamList,
-	'MainScreen'
+export type AllPostsScreenProps = CompositeScreenProps<
+	BottomTabScreenProps<RootTabParamList, 'AllPosts'>,
+	StackScreenProps<RootStackParamList, 'MainScreen'>
 >
-export type BookedScreenProps = StackScreenProps<
-	RootStackParamList,
-	'MainScreen'
+
+export type BookedScreenProps = CompositeScreenProps<
+	BottomTabScreenProps<RootTabParamList, 'Booked'>,
+	StackScreenProps<RootStackParamList>
 >
 export type PostScreenProps = StackScreenProps<RootStackParamList, 'PostScreen'>
 export type AboutScreenProps = StackScreenProps<
