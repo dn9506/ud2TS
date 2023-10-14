@@ -34,6 +34,6 @@ export type AboutScreenProps = StackScreenProps<
 	'MainScreen'
 >
 export type CreateScreenProps = StackScreenProps<
-	RootStackParamList,
-	'MainScreen'
+	RootDrawerParamList,
+	'CreatePost'
 >

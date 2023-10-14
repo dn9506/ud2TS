@@ -1,3 +1,4 @@
+import { StackNavigationOptions } from '@react-navigation/stack'
 import React from 'react'
 import { FlatList, StyleSheet, Text, View } from 'react-native'
 import Post from '../../components/Post'
@@ -5,7 +6,10 @@ import { DATA } from '../../data'
 import { IPost } from '../../models/IPost'
 import { BookedScreenProps } from './types/types'
 
-const BookedScreen: React.FC<BookedScreenProps> = ({ route, navigation }) => {
+export const BookedScreen: React.FC<BookedScreenProps> = ({
+	route,
+	navigation,
+}) => {
 	const posts: IPost[] = DATA.filter(post => post.booked)
 	return (
 		<View>
@@ -26,8 +30,6 @@ const BookedScreen: React.FC<BookedScreenProps> = ({ route, navigation }) => {
 	)
 }
 
-BookedScreen.navigationOptions:React.Fc<Options> = () => ({})
-
-export default BookedScreen
+export const bookedScreenNavigationOptions = (): StackNavigationOptions => ({})
 
 const styles = StyleSheet.create({})

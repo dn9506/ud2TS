@@ -4,11 +4,11 @@ import { createDrawerNavigator } from '@react-navigation/drawer'
 import { createStackNavigator } from '@react-navigation/stack'
 import { Alert } from 'react-native'
 import { HeaderButtons, Item } from 'react-navigation-header-buttons'
-import AboutScreen from './screens/AboutScreen'
-import AllPostsScreen from './screens/AllPostsScreen'
-import BookedScreen from './screens/BookedScreen'
-import CreatePostScreen from './screens/CreatePostScreen'
-import PostScreen from './screens/PostScreen'
+import { AboutScreen } from './screens/AboutScreen'
+import { AllPostsScreen } from './screens/AllPostsScreen'
+import { BookedScreen } from './screens/BookedScreen'
+import { CreatePostScreen } from './screens/CreatePostScreen'
+import { PostScreen } from './screens/PostScreen'
 import {
 	RootDrawerParamList,
 	RootStackParamList,

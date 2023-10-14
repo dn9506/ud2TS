@@ -1,9 +1,10 @@
+import { StackNavigationOptions } from '@react-navigation/stack'
 import React from 'react'
 import { Image, StyleSheet, Text, View } from 'react-native'
 import { DATA } from '../../data'
 import { PostScreenProps } from './types/types'
 
-const PostScreen = ({ route, navigation }: PostScreenProps) => {
+export const PostScreen = ({ route, navigation }: PostScreenProps) => {
 	const post = DATA.find(post => post.id === route.params.postId)
 
 	return (
@@ -15,7 +16,7 @@ const PostScreen = ({ route, navigation }: PostScreenProps) => {
 	)
 }
 
-export default PostScreen
+export const postScreenNavigationOptions = (): StackNavigationOptions => ({})
 
 const styles = StyleSheet.create({
 	img: {},

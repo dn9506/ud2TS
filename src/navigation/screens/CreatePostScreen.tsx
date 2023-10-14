@@ -1,7 +1,9 @@
-import React from 'react'
+import { StackNavigationOptions } from '@react-navigation/stack'
+import React, { FC } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
+import { CreateScreenProps } from './types/types'
 
-const CreatePostScreen = () => {
+export const CreatePostScreen: FC<CreateScreenProps> = () => {
 	return (
 		<View>
 			<Text>CreatePostScreen</Text>
@@ -9,6 +11,7 @@ const CreatePostScreen = () => {
 	)
 }
 
-export default CreatePostScreen
+export const createPostScreenNavigationOptions =
+	(): StackNavigationOptions => ({})
 
 const styles = StyleSheet.create({})
