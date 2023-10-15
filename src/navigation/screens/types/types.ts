@@ -23,16 +23,12 @@ export type AllPostsScreenProps = CompositeScreenProps<
 	BottomTabScreenProps<RootTabParamList, 'AllPosts'>,
 	StackScreenProps<RootStackParamList, 'MainScreen'>
 >
-
 export type BookedScreenProps = CompositeScreenProps<
 	BottomTabScreenProps<RootTabParamList, 'Booked'>,
-	StackScreenProps<RootStackParamList>
+	StackScreenProps<RootStackParamList, 'MainScreen'>
 >
 export type PostScreenProps = StackScreenProps<RootStackParamList, 'PostScreen'>
-export type AboutScreenProps = StackScreenProps<
-	RootStackParamList,
-	'MainScreen'
->
+export type AboutScreenProps = StackScreenProps<RootDrawerParamList, 'About'>
 export type CreateScreenProps = StackScreenProps<
 	RootDrawerParamList,
 	'CreatePost'

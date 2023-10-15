@@ -8,7 +8,7 @@ import { AboutScreen } from './screens/AboutScreen'
 import { AllPostsScreen } from './screens/AllPostsScreen'
 import { BookedScreen } from './screens/BookedScreen'
 import { CreatePostScreen } from './screens/CreatePostScreen'
-import { PostScreen } from './screens/PostScreen'
+import { PostScreen, postScreenNavigationOptions } from './screens/PostScreen'
 import {
 	RootDrawerParamList,
 	RootStackParamList,
@@ -45,10 +45,16 @@ const RootTabHeaderOptions = {
 			<Item
 				title='toggleDrawer'
 				iconName='drawer'
-				onPress={() => Alert.alert('settings')}
+				onPress={() => navigation.toggleDrawer()}
 			/>
 		</HeaderButtons>
 	),
+	tabBarStyle: {
+		backgroundColor: '#3B6183',
+	},
+	tabBarActiveTintColor: 'white',
+	tabBarLabelStyle: { paddingBottom: 5 },
+	headerLeftContainerStyle: { paddingLeft: 10 },
 }
 
 const Drawer = createDrawerNavigator<RootDrawerParamList>()
@@ -64,13 +70,20 @@ const DrawerNavigation = () => (
 )
 
 const StackNavigation = () => (
-	<Stack.Navigator screenOptions={RootScreenOptions}>
+	<Stack.Navigator
+		screenOptions={RootScreenOptions}
+		initialRouteName='MainScreen'
+	>
 		<Stack.Screen
 			name='MainScreen'
 			component={TabNavigation}
 			options={{ headerShown: false }}
 		/>
-		<Stack.Screen name='PostScreen' component={PostScreen} />
+		<Stack.Screen
+			name='PostScreen'
+			component={PostScreen}
+			options={postScreenNavigationOptions}
+		/>
 	</Stack.Navigator>
 )
 
@@ -79,12 +92,6 @@ const TabNavigation = () => (
 		screenOptions={{
 			...RootScreenOptions,
 			...RootTabHeaderOptions,
-			tabBarStyle: {
-				backgroundColor: '#3B6183',
-			},
-			tabBarActiveTintColor: 'white',
-			tabBarLabelStyle: { paddingBottom: 5 },
-			headerLeftContainerStyle: { paddingLeft: 10 },
 		}}
 	>
 		<Tab.Screen
