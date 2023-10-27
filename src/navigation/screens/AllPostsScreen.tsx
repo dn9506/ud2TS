@@ -1,38 +1,20 @@
-import { StackNavigationOptions } from '@react-navigation/stack'
-import React, { FC } from 'react'
-import { FlatList, StyleSheet, Text, View } from 'react-native'
-import Post from '../../components/Post'
-import { DATA } from '../../data'
-import { IPost } from '../../models/IPost'
-import { AllPostsScreenProps } from './types/types'
+import { DrawerNavigationOptions } from '@react-navigation/drawer'
+import React, { Component } from 'react'
+import { StyleSheet, Text, View } from 'react-native'
 
-export const AllPostsScreen: FC<AllPostsScreenProps> = ({ navigation }) => {
-	const posts: IPost[] = DATA
-
-	return (
-		<View>
-			<Text>AllPostsScreen</Text>
-
-			<FlatList
-				data={posts}
-				renderItem={post => (
-					<Post
-						key={post.item.id}
-						post={post.item}
-						goToPost={() =>
-							navigation.navigate('PostScreen', { postId: post.item.id })
-						}
-					/>
-				)}
-			/>
-		</View>
-	)
+export default class AllPostsScreen extends Component {
+	static screenOptions: DrawerNavigationOptions = {
+		headerTitle: 'Some Text',
+		headerTintColor: '#fff',
+		headerStyle: { backgroundColor: '#1612' },
+	}
+	render() {
+		return (
+			<View>
+				<Text>AllPostsScreen</Text>
+			</View>
+		)
+	}
 }
 
-export const allPostsScreenNavigationOptions = (): StackNavigationOptions => {
-	return { headerRight: () => <Text></Text> }
-}
-
-const styles = StyleSheet.create({
-	container: {},
-})
+const styles = StyleSheet.create({})
