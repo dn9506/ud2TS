@@ -1,8 +1,8 @@
 import { DrawerNavigationOptions } from '@react-navigation/drawer'
 import React, { Component } from 'react'
-import { Text, View } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 
-export class AboutScreen extends Component {
+export default class AboutScreen extends Component {
 	static screenOptions: DrawerNavigationOptions = {}
 	render() {
 		return (
@@ -13,4 +13,6 @@ export class AboutScreen extends Component {
 	}
 }
 
-export default AboutScreen
+const styles = StyleSheet.create({
+	container: {},
+})
