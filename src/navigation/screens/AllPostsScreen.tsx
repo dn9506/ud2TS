@@ -4,21 +4,23 @@ import { FlatList, StyleSheet, View } from 'react-native'
 import { DATA } from '../../store/data'
 import Post from './components/Post'
 
-export const AllPostsScreen: FC = () => {
+const AllPostsScreen: FC = () => {
 	const posts = DATA
 
 	return (
 		<View style={styles.container}>
 			<FlatList
 				data={posts}
-				renderItem={elem => <Post post={elem} />}
+				renderItem={elem => <Post post={elem.item} />}
 				keyExtractor={post => post.id}
 			/>
 		</View>
 	)
 }
 
-export const AllPostsScreenOptions: DrawerNavigationOptions = {
+export default AllPostsScreen
+
+export const allPostsScreenOptions: DrawerNavigationOptions = {
 	headerTitle: 'Some Text',
 	headerTintColor: '#fff',
 	headerStyle: { backgroundColor: '#1612' },

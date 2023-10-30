@@ -1,16 +1,14 @@
-import { BottomTabNavigationOptions } from '@react-navigation/bottom-tabs'
-import React, { Component } from 'react'
+import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 
-export default class BookedPostsScreen extends Component {
-	static screenOptions: BottomTabNavigationOptions = {}
-	render() {
-		return (
-			<View>
-				<Text>BookedPostsScreen</Text>
-			</View>
-		)
-	}
+const BookedPostsScreen = () => {
+	return (
+		<View>
+			<Text>BookedPostsScreen</Text>
+		</View>
+	)
 }
+
+export default BookedPostsScreen
 
 const styles = StyleSheet.create({})

@@ -3,10 +3,17 @@ import { ImageBackground, StyleSheet, Text } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { IPost } from '../../../model/IPost'
 
-const Post: FC<{ post: IPost }> = ({ post }) => {
+interface IPostComponent {
+	post: IPost
+}
+const Post: FC<IPostComponent> = ({ post }) => {
 	return (
 		<TouchableOpacity>
-			<ImageBackground source={{ uri: post.img }} style={styles.img}>
+			<ImageBackground
+				source={{ uri: post.img }}
+				resizeMode='cover'
+				style={styles.img}
+			>
 				<Text style={styles.time}>{post.date}</Text>
 			</ImageBackground>
 		</TouchableOpacity>
@@ -16,6 +23,6 @@ const Post: FC<{ post: IPost }> = ({ post }) => {
 export default Post
 
 const styles = StyleSheet.create({
-	img: { width: '100%', height: 200 },
+	img: { height: 200 },
 	time: {},
 })
