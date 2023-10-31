@@ -20,10 +20,12 @@ const AllPostsScreen: FC = () => {
 
 export default AllPostsScreen
 
-export const allPostsScreenOptions: DrawerNavigationOptions = {
-	headerTitle: 'Some Text',
-	headerTintColor: '#fff',
-	headerStyle: { backgroundColor: '#1612' },
+export const allPostsScreenOptions = (): DrawerNavigationOptions => {
+	return {
+		headerTitle: 'Some Text',
+		headerTintColor: '#fff',
+		headerStyle: { backgroundColor: '#1612' },
+	}
 }
 
 const styles = StyleSheet.create({

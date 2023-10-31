@@ -14,7 +14,7 @@ const Post: FC<IPostComponent> = ({ post }) => {
 				resizeMode='cover'
 				style={styles.img}
 			>
-				<Text style={styles.time}>{post.date}</Text>
+				<Text style={styles.time}>{post.date.toLocaleString()}</Text>
 			</ImageBackground>
 		</TouchableOpacity>
 	)
@@ -23,6 +23,10 @@ const Post: FC<IPostComponent> = ({ post }) => {
 export default Post
 
 const styles = StyleSheet.create({
-	img: { height: 200 },
-	time: {},
+	img: { height: 200, marginVertical: 5 },
+	time: {
+		backgroundColor: 'rgba(0, 0, 0, 0.3)',
+		color: '#fff',
+		textAlign: 'center',
+	},
 })
