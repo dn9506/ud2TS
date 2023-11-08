@@ -5,7 +5,7 @@ export type TDrawerNavigation = {
 }
 export type TStackNavigation = {
 	TabContainer: undefined
-	PostScreen: undefined
+	PostScreen: { postId: string }
 }
 
 export type TBottomTabNavigation = {

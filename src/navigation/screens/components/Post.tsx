@@ -5,10 +5,11 @@ import { IPost } from '../../../model/IPost'
 
 interface IPostComponent {
 	post: IPost
+	goToPost: (id: string) => void
 }
-const Post: FC<IPostComponent> = ({ post }) => {
+const Post: FC<IPostComponent> = ({ post, goToPost }) => {
 	return (
-		<TouchableOpacity>
+		<TouchableOpacity onPress={() => goToPost(post.id)}>
 			<ImageBackground
 				source={{ uri: post.img }}
 				resizeMode='cover'

@@ -1,15 +1,24 @@
 import React, { FC } from 'react'
-import { Button, StyleSheet } from 'react-native'
+import { StyleSheet, Text } from 'react-native'
+import { TouchableOpacity } from 'react-native-gesture-handler'
+import { btnColors } from '../../../theme'
 
 interface IAppButton {
-	color: THEME.btnColors
+	color: btnColors
 	title: string
+	onPress: () => void
 }
 
 const AppButton: FC<IAppButton> = props => (
-	<Button title={props.title} color={props.color} />
+	<TouchableOpacity onPress={props.onPress}>
+		<Text style={{ ...styles.btn, backgroundColor: props.color }}>
+			{props.title}
+		</Text>
+	</TouchableOpacity>
 )
 
 export default AppButton
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+	btn: { paddingHorizontal: 15, paddingVertical: 5 },
+})

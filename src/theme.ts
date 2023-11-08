@@ -1,4 +1,4 @@
-enum colors {
+export enum btnColors {
 	dangerColor = '#ff5252',
 	defaultColor = '#74CEB7',
 }
@@ -6,5 +6,5 @@ enum colors {
 export const THEME = {
 	backgroundColor: '#3B6183',
 	textColor: '#fff',
-	btnColors: colors,
+	btnColors: btnColors,
 }
