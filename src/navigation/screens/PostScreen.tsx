@@ -1,6 +1,6 @@
 import { StackScreenProps } from '@react-navigation/stack'
 import React, { FC, useState } from 'react'
-import { Image, StyleSheet, Text, View } from 'react-native'
+import { Alert, Image, StyleSheet, Text, View } from 'react-native'
 import { IPost } from '../../model/IPost'
 import { DATA } from '../../store/data'
 import { btnColors } from '../../theme'
@@ -14,12 +14,25 @@ const PostScreen: FC<props> = ({ route, navigation }) => {
 	const [post, setPost] = useState<IPost>(countPost)
 
 	const cancelBtn = () => {
-		console.log('cancel button click')
 		navigation.goBack()
 	}
 
 	const removeBtn = () => {
 		console.log('remove button click')
+		Alert.alert('Remove', 'Are you sure want delete this post?', [
+			{
+				text: 'Cancel',
+				style: 'cancel',
+			},
+			{
+				text: 'Delete',
+				onPress: () => {
+					navigation.goBack()
+					console.log('DeleteBtn, не дописано')
+				},
+				style: 'destructive',
+			},
+		])
 	}
 
 	return (
