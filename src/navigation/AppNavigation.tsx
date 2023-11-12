@@ -11,6 +11,7 @@ import BookedPostsScreen from './screens/BookedPostsScreen'
 import CreatePostScreen from './screens/CreatePostScreen'
 import PostScreen from './screens/PostScreen'
 import { bottomTabScreenOptions } from './screens/components/bottomTabScreenOptions'
+import mainScreenHeader from './screens/components/mainScreenHeader'
 import {
 	TBottomTabNavigation,
 	TDrawerNavigation,
@@ -40,28 +41,24 @@ const BottomNavigate: FC = () => (
 
 const StackNavigate: FC = () => (
 	<Stack.Navigator screenOptions={RootScreenOptions}>
-		<Stack.Screen name='TabContainer' component={BottomNavigate} />
+		<Stack.Screen
+			name='TabContainer'
+			component={BottomNavigate}
+			options={mainScreenHeader}
+		/>
 		<Stack.Screen name='PostScreen' component={PostScreen} />
 	</Stack.Navigator>
 )
 
 const DrawerNavigate: FC = () => (
-	<Drawer.Navigator screenOptions={{ headerShown: false }}>
+	<Drawer.Navigator screenOptions={{}}>
 		<Drawer.Screen
 			name='StackContainer'
 			component={StackNavigate}
-			/*options={allPostsScreenOptions}*/
+			options={{ headerShown: false }}
 		/>
-		<Drawer.Screen
-			name='AboutScreen'
-			component={AboutScreen}
-			/*options={aboutScreenNavigationOptions}*/
-		/>
-		<Drawer.Screen
-			name='CreatePost'
-			component={CreatePostScreen}
-			/*options={CreatePostScreenOptions}*/
-		/>
+		<Drawer.Screen name='AboutScreen' component={AboutScreen} />
+		<Drawer.Screen name='CreatePost' component={CreatePostScreen} />
 	</Drawer.Navigator>
 )
 

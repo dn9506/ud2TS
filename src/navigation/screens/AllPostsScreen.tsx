@@ -3,7 +3,13 @@ import {
 	StackScreenProps,
 } from '@react-navigation/stack'
 import React, { FC, useState } from 'react'
-import { FlatList, StyleSheet, View } from 'react-native'
+import {
+	FlatList,
+	StyleSheet,
+	Text,
+	TouchableOpacity,
+	View,
+} from 'react-native'
 import { IPost } from '../../model/IPost'
 import { DATA } from '../../store/data'
 import Post from './components/Post'
@@ -29,8 +35,16 @@ const AllPostsScreen: FC<props> = ({ navigation }) => {
 
 export default AllPostsScreen
 
-export const allPostsScreenOptions = (): StackNavigationOptions => {
-	return {}
+export const allPostsScreenOptions: FC<props> = ({
+	navigation,
+}): StackNavigationOptions => {
+	return {
+		headerRight: () => (
+			<TouchableOpacity>
+				<Text>Booked</Text>
+			</TouchableOpacity>
+		),
+	}
 }
 
 const styles = StyleSheet.create({
