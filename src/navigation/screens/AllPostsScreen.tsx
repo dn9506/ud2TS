@@ -1,21 +1,20 @@
-import {
-	StackNavigationOptions,
-	StackScreenProps,
-} from '@react-navigation/stack'
+import { BottomTabScreenProps } from '@react-navigation/bottom-tabs'
+import { CompositeScreenProps } from '@react-navigation/native'
+import { StackScreenProps } from '@react-navigation/stack'
 import React, { FC, useState } from 'react'
-import {
-	FlatList,
-	StyleSheet,
-	Text,
-	TouchableOpacity,
-	View,
-} from 'react-native'
+import { FlatList, StyleSheet, View } from 'react-native'
 import { IPost } from '../../model/IPost'
 import { DATA } from '../../store/data'
 import Post from './components/Post'
-import { TStackNavigation } from './components/types/navigationTypes'
+import {
+	TBottomTabNavigation,
+	TStackNavigation,
+} from './components/types/navigationTypes'
 
-type props = StackScreenProps<TStackNavigation, 'TabContainer'>
+type props = CompositeScreenProps<
+	StackScreenProps<TStackNavigation, 'TabContainer'>,
+	BottomTabScreenProps<TBottomTabNavigation, 'AllPostScreen'>
+>
 
 const AllPostsScreen: FC<props> = ({ navigation }) => {
 	const [posts, setPosts] = useState<IPost[]>(DATA)
@@ -34,18 +33,6 @@ const AllPostsScreen: FC<props> = ({ navigation }) => {
 }
 
 export default AllPostsScreen
-
-export const allPostsScreenOptions: FC<props> = ({
-	navigation,
-}): StackNavigationOptions => {
-	return {
-		headerRight: () => (
-			<TouchableOpacity>
-				<Text>Booked</Text>
-			</TouchableOpacity>
-		),
-	}
-}
 
 const styles = StyleSheet.create({
 	container: { backgroundColor: '#fff' },

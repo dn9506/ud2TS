@@ -1,26 +1,32 @@
 import { DrawerScreenProps } from '@react-navigation/drawer'
-import React, { FC } from 'react'
-import { StyleSheet, Text, TouchableOpacity } from 'react-native'
+import React from 'react'
+import { StyleSheet } from 'react-native'
+import { HeaderButtons, Item } from 'react-navigation-header-buttons'
+import AppHeaderIcon from './AppHeaderIcon'
 import { TDrawerNavigation } from './types/navigationTypes'
 
 type props = DrawerScreenProps<TDrawerNavigation, 'StackContainer'>
 
-const mainScreenHeader: FC<props> = ({ navigation }) => {
-	const btnLeft = () => (
-		<TouchableOpacity onPress={() => navigation.toggleDrawer()}>
-			<Text>LLL</Text>
-		</TouchableOpacity>
-	)
+const mainScreenHeader = ({ navigation }: props) => {
+	const btnLeft = () => navigation.toggleDrawer()
 
-	const btnRight = () => (
-		<TouchableOpacity onPress={() => navigation.jumpTo('CreatePost')}>
-			<Text>RRR</Text>
-		</TouchableOpacity>
-	)
+	const btnRight = () => navigation.jumpTo('CreatePost')
 
 	return {
-		headerLeft: btnLeft,
-		headerRight: btnRight,
+		headerLeft: (
+			<HeaderButtons HeaderButtonComponent={AppHeaderIcon}>
+				<Item title='Menu' iconName='menu' onPress={() => btnLeft()} />
+			</HeaderButtons>
+		),
+		headerRight: (
+			<HeaderButtons HeaderButtonComponent={AppHeaderIcon}>
+				<Item
+					title='New post'
+					iconName='photo-camera'
+					onPress={() => btnRight()}
+				/>
+			</HeaderButtons>
+		),
 	}
 }
 
