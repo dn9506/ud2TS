@@ -1,3 +1,5 @@
+import { BottomTabScreenProps } from '@react-navigation/bottom-tabs'
+import { CompositeScreenProps } from '@react-navigation/native'
 import { StackScreenProps } from '@react-navigation/stack'
 import React, { FC } from 'react'
 import {
@@ -8,10 +10,13 @@ import {
 	View,
 } from 'react-native'
 import { DATA } from '../../store/data'
+import { TBottomTabNavigation, TStackNavigation } from '../AppNavigation.props'
 import Post from './components/Post'
-import { TStackNavigation } from './components/types/navigationTypes'
 
-type props = StackScreenProps<TStackNavigation, 'TabContainer'>
+type props = CompositeScreenProps<
+	BottomTabScreenProps<TBottomTabNavigation, 'BookedScreen'>,
+	StackScreenProps<TStackNavigation, 'TabContainer'>
+>
 
 const BookedPostsScreen: FC<props> = ({ navigation }) => {
 	const posts = DATA.filter(elem => elem.booked)

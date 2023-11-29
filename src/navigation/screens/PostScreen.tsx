@@ -1,38 +1,25 @@
 import { StackScreenProps } from '@react-navigation/stack'
 import React, { FC, useState } from 'react'
-import { Alert, Image, StyleSheet, Text, View } from 'react-native'
+import { Image, StyleSheet, Text, View } from 'react-native'
 import { IPost } from '../../model/IPost'
 import { DATA } from '../../store/data'
 import { btnColors } from '../../theme'
+import { TStackNavigation } from '../AppNavigation.props'
 import AppButton from './components/AppButton'
-import { TStackNavigation } from './components/types/navigationTypes'
 
 type props = StackScreenProps<TStackNavigation, 'PostScreen'>
 
 const PostScreen: FC<props> = ({ route, navigation }) => {
-	const countPost = DATA.find(elem => elem.id === route.params.postId)!
-	const [post, setPost] = useState<IPost>(countPost)
+	const [post, setPost] = useState<IPost>(
+		DATA.find(elem => elem.id === route.params.postId)!
+	)
 
 	const cancelBtn = () => {
 		navigation.goBack()
 	}
 
 	const removeBtn = () => {
-		console.log('remove button click')
-		Alert.alert('Remove', 'Are you sure want delete this post?', [
-			{
-				text: 'Cancel',
-				style: 'cancel',
-			},
-			{
-				text: 'Delete',
-				onPress: () => {
-					navigation.goBack()
-					console.log('DeleteBtn, не дописано')
-				},
-				style: 'destructive',
-			},
-		])
+		navigation.navigate('ModalScreen', { postId: post.id })
 	}
 
 	return (

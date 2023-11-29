@@ -2,8 +2,8 @@ import { DrawerScreenProps } from '@react-navigation/drawer'
 import React from 'react'
 import { StyleSheet } from 'react-native'
 import { HeaderButtons, Item } from 'react-navigation-header-buttons'
+import { TDrawerNavigation } from '../../AppNavigation'
 import AppHeaderIcon from './AppHeaderIcon'
-import { TDrawerNavigation } from './types/navigationTypes'
 
 type props = DrawerScreenProps<TDrawerNavigation, 'StackContainer'>
 

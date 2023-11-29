@@ -5,15 +5,12 @@ import React, { FC, useState } from 'react'
 import { FlatList, StyleSheet, View } from 'react-native'
 import { IPost } from '../../model/IPost'
 import { DATA } from '../../store/data'
+import { TBottomTabNavigation, TStackNavigation } from '../AppNavigation.props'
 import Post from './components/Post'
-import {
-	TBottomTabNavigation,
-	TStackNavigation,
-} from './components/types/navigationTypes'
 
 type props = CompositeScreenProps<
-	StackScreenProps<TStackNavigation, 'TabContainer'>,
-	BottomTabScreenProps<TBottomTabNavigation, 'AllPostScreen'>
+	BottomTabScreenProps<TBottomTabNavigation, 'AllPostScreen'>,
+	StackScreenProps<TStackNavigation, 'TabContainer'>
 >
 
 const AllPostsScreen: FC<props> = ({ navigation }) => {
