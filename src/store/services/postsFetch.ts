@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react'
+import { IPost } from '../../model/IPost'
 
 export const postsApi = createApi({
 	reducerPath: 'postApi',
@@ -8,6 +9,13 @@ export const postsApi = createApi({
 	}),
 	tagTypes: ['Post'],
 	endpoints: build => ({
-		fetchAllPosts: build.query({ query: () => ({ url: '/DB' }) }),
+		fetchAllPosts: build.query<IPost[], void>({
+			query: () => ({ url: '/DB.json' }),
+			transformResponse: (responseData): IPost[] =>
+				Object.keys(responseData).map(postId => ({
+					...responseData[postId],
+					id: postId,
+				})),
+		}),
 	}),
 })

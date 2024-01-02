@@ -1,10 +1,9 @@
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs'
 import { CompositeScreenProps } from '@react-navigation/native'
 import { StackScreenProps } from '@react-navigation/stack'
-import React, { FC, useState } from 'react'
-import { FlatList, StyleSheet, View } from 'react-native'
-import { IPost } from '../../model/IPost'
-import { DATA } from '../../store/data'
+import React, { FC } from 'react'
+import { FlatList, StyleSheet, Text, View } from 'react-native'
+import { postsApi } from '../../store/services/postsFetch'
 import { TBottomTabNavigation, TStackNavigation } from '../AppNavigation.props'
 import Post from './components/Post'
 
@@ -14,17 +13,30 @@ type props = CompositeScreenProps<
 >
 
 const AllPostsScreen: FC<props> = ({ navigation }) => {
-	const [posts, setPosts] = useState<IPost[]>(DATA)
+	const {
+		isLoading,
+		isError,
+		isSuccess,
+		error,
+		data: posts,
+	} = postsApi.useFetchAllPostsQuery()
+
 	const goToPost = (id: string) => {
-		navigation.push('PostScreen', { postId: id })
+		navigation.push('PostScreen', {
+			post: posts!.find(elem => elem.id === id)!,
+		})
 	}
 	return (
 		<View style={styles.container}>
-			<FlatList
-				data={posts}
-				renderItem={elem => <Post post={elem.item} goToPost={goToPost} />}
-				keyExtractor={post => post.id}
-			/>
+			{isLoading && <Text>Loading Data...</Text>}
+			{isError && <Text>Error... </Text>}
+			{isSuccess && (
+				<FlatList
+					data={posts}
+					renderItem={elem => <Post post={elem.item} goToPost={goToPost} />}
+					keyExtractor={post => post.id}
+				/>
+			)}
 		</View>
 	)
 }

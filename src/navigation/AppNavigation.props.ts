@@ -1,4 +1,5 @@
 import { NavigatorScreenParams } from '@react-navigation/native'
+import { IPost } from '../model/IPost'
 
 export type TDrawerNavigation = {
 	StackContainer: NavigatorScreenParams<TStackNavigation>
@@ -7,7 +8,7 @@ export type TDrawerNavigation = {
 }
 export type TStackNavigation = {
 	TabContainer: NavigatorScreenParams<TBottomTabNavigation>
-	PostScreen: { postId: string }
+	PostScreen: { post: IPost }
 	ModalScreen: { postId: string }
 }
 
